@@ -5,10 +5,16 @@ import 'package:project1/core/utils/app_styles.dart';
 class CustomElevatedButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
+  final double? width, height;
+
+  final bool isDetils;
   const CustomElevatedButton({
     super.key,
     required this.title,
     required this.onPressed,
+    this.isDetils = false,
+    this.width,
+    this.height,
   });
 
   @override
@@ -18,7 +24,9 @@ class CustomElevatedButton extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             backgroundColor: AppColors.kPrimColor,
-            minimumSize: Size(MediaQuery.sizeOf(context).width * .7, 50)),
+            minimumSize: Size(
+                isDetils ? width ?? 0 : MediaQuery.sizeOf(context).width * .7,
+                height ?? 50)),
         onPressed: onPressed,
         child: Text(
           title,

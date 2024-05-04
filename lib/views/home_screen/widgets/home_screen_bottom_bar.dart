@@ -3,20 +3,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project1/core/utils/app_colors.dart';
 import 'package:project1/core/utils/app_styles.dart';
 
-class HomeBottomBar extends StatefulWidget {
-  const HomeBottomBar({super.key});
+class HomeScreenBottomBar extends StatefulWidget {
+  final void Function(int) onTap;
+  final int index;
+  const HomeScreenBottomBar(
+      {super.key, required this.onTap, required this.index});
 
   @override
-  State<HomeBottomBar> createState() => _HomeBottomBarState();
+  State<HomeScreenBottomBar> createState() => _HomeScreenBottomBarState();
 }
 
-class _HomeBottomBarState extends State<HomeBottomBar> {
-  int selectindex = 0;
+class _HomeScreenBottomBarState extends State<HomeScreenBottomBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      
-        currentIndex: selectindex,
+        currentIndex: widget.index,
         mouseCursor: MouseCursor.uncontrolled,
         landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
         enableFeedback: true,
@@ -30,18 +31,13 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
         // iconSize: 25,
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.kPrimColor,
-        onTap: (index) {
-          setState(() {
-            selectindex = index;
-          });
-        },
+        onTap: widget.onTap,
         items: const [
-          BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.user),
-              label: 'المــلف الشخصي'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'الرئيسية'),
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.cartShopping), label: 'الســلة'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'الرئيسية'),
+          BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.user), label: 'المــلف الشخصي'),
         ]);
   }
 }

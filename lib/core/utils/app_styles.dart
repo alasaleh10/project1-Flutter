@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project1/core/utils/app_colors.dart';
 import 'package:project1/core/utils/responsive_text.dart';
 
-
 abstract class AppStyles {
   static TextStyle textStyle25Regular(BuildContext context) {
     return TextStyle(
@@ -35,6 +34,7 @@ abstract class AppStyles {
         fontFamily: 'ElMessiri',
         fontWeight: FontWeight.w800);
   }
+
   static TextStyle textStyle25bold(BuildContext context) {
     return TextStyle(
         fontSize: getResponsiveFontSize(context, fontSize: 23),

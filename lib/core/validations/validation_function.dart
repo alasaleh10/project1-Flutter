@@ -35,7 +35,7 @@ validations({required String value, required String type}) {
     //   return 'خطا في إالبريد الإلكتروني';
     // }
     case 'password':
-      if (value.length <= 8) return 'كلمة المرور يجب تكون اكبر من 7';
+      if (value.length <= 6) return 'كلمة المرور يجب تكون اكبر من 6';
       if (value.length > 16) return 'كلمة المرور يجب ان تكون اصغر من 17';
       if (value.contains(' ')) return 'كلمة المرور يجب ان لاتحتوي على مسافات';
 

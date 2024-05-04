@@ -9,7 +9,6 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(context, title: 'تــسجيل'),
-
       body: const SignUpBodyView(),
     );
   }

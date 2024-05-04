@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -76,7 +78,7 @@ class _LoginBodyViewState extends State<LoginBodyView> {
               ),
               const SizedBox(height: 20),
               isLoading
-                  ? const CircularProgressIndicator()
+                  ? const Center(child: CircularProgressIndicator())
                   : Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: MediaQuery.sizeOf(context).width * .1),
@@ -109,21 +111,25 @@ class _LoginBodyViewState extends State<LoginBodyView> {
     if (_key.currentState!.validate()) {
       isLoading = true;
       setState(() {});
-      var response = await helper.postData(
-          endPoint: EndPoints.login,
-          data: {'email': _email.text, 'password': _password.text});
-      isLoading = false;
-
-      if (response['status'] == true) {
-        CacheHelper.saveData(key: 'id', value: response['data']['user_id']);
-        // ignore: use_build_context_synchronously
-        GoRouter.of(context).pushReplacementNamed(AppRouters.homeView);
-       
-      } else {
-        // ignore: use_build_context_synchronously
-        dispalySnackBar(context, message: response['message']);
+      try {
+        var response = await helper.postData(
+            endPoint: EndPoints.login,
+            data: {'email': _email.text, 'password': _password.text});
+        isLoading = false;
+        setState(() {});
+        if (response['status'] == true) {
+          CacheHelper.saveData(key: 'id', value: response['data']['user_id']);
+          // ignore: use_build_context_synchronously
+          GoRouter.of(context).pushReplacementNamed(AppRouters.homeScreenView);
+        } else {
+          // ignore: use_build_context_synchronously
+          dispalySnackBar(context, message: response['message']);
+        }
+      } catch (e) {
+        isLoading = false;
+        setState(() {});
+        log(e.toString());
       }
-      setState(() {});
     }
   }
 }
